@@ -6,13 +6,13 @@ run_spinner() {
     PID=$!
     i=1
     sp="/-\|"
-    echo -n ' '
+    echo -n $2' '
     while [ -d /proc/$PID ]
     do
         printf "\b${sp:i++%${#sp}:1}"
         sleep 0.1
-    donen
-    echo "\n"
+    done
+    printf "\n"
 }
 
 echo -e "\e[1mGoogle Earth installer for Liquid Galaxy\e[0m"
@@ -26,10 +26,7 @@ echo -e "\e[32mDownloading latest deb package...\e[0m"
 wget http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb -q --show-progress
 
 echo -e "\e[32mInstalling package... (This might take a minute) "
-echo -e "Run dpkg "
-run_spinner "sudo dpkg -s -i google-earth-stable_current_amd64.deb 2> /dev/null"
-echo -e "Run apt-get "
-run_spinner "sudo apt-get -qq -f install -y"
+run_spinner "sudo apt-get -qq install google-earth-stable_current_amd64.deb -y" "Run apt-get"
 
 echo -e "Removing old file\n\e[0m"
 rm google-earth-stable_current_amd64.deb
@@ -43,7 +40,7 @@ case "$master" in
         ;;
     *)
         echo -e "\e[32mConfigure Google Earth...\e[0m"
-        read -p "Please specifiy the yaw (Left: -36.5, Right: 36.5): " yaw
+        read -p "Please specifiy the yaw (Left: 36.5, Right: -36.5): " yaw
         sudo sed -i "4i; ViewSync settings\nViewSync/send = false\nViewSync/receive = true\nViewSync/port = 21567\nViewSync/yawOffset = $yaw\nViewSync/pitchOffset = 0.0\nViewSync/rollOffset = 0.0\nViewSync/horizFov = 36.5" /opt/google/earth/pro/drivers.ini
         ;;
 esac
