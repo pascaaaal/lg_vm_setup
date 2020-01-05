@@ -26,7 +26,7 @@ echo -e "\e[32mDownloading latest deb package...\e[0m"
 wget http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb -q --show-progress
 
 echo -e "\e[32mInstalling package... (This might take a minute) "
-run_spinner "sudo apt-get -qq install google-earth-stable_current_amd64.deb -y" "Run apt-get"
+run_spinner "sudo apt-get -qq install ./google-earth-stable_current_amd64.deb -y" "Run apt-get"
 
 echo -e "Removing old file\n\e[0m"
 rm google-earth-stable_current_amd64.deb
