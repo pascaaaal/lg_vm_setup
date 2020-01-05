@@ -1,10 +1,10 @@
 #/bin/bash
 echo "Google Earth installer for Liquid Galaxy"
 
-sudo apt-get -qq update
+echo "\e[32mInstalling requirements...\e[39m"
 sudo apt-get -qq install net-tools -y
 
-echo "Installing Google Earth"
+echo -e "\e[32mInstalling Google Earth...\e[39m"
 cd /tmp
 wget http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
 sudo dpkg -i google-earth-stable_current_amd64.deb
@@ -23,7 +23,7 @@ case "$master" in
         ;;
 esac
 
-echo "Alright you're ready"
+echo -e "\e[32mAlright you're ready\e[39m"
 read -p "Do you want to start Google Earth? [y/n]: " run
 case "$master" in
     [yY][eE][sS]|[yY])
