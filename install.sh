@@ -1,4 +1,5 @@
 #/bin/bash
+#If the script doesn't work, please make a new issue on https://github.com/pascaaaal/lg_vm_setup/issues
 
 run_spinner() {
     $1 &
@@ -10,21 +11,26 @@ run_spinner() {
     do
         printf "\b${sp:i++%${#sp}:1}"
         sleep 0.1
-    done
+    donen
     echo "\n"
 }
 
 echo -e "\e[1mGoogle Earth installer for Liquid Galaxy\e[0m"
 
 echo -e "\e[32mInstalling requirements...\e[0m"
-sudo apt-get -qq install net-tools -y
+run_spinner "sudo apt-get -qq install net-tools -y"
 
 echo -e "\e[32mInstalling Google Earth...\e[0m"
 cd /tmp
 echo -e "\e[32mDownloading latest deb package...\e[0m"
 wget http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb -q --show-progress
+
 echo -e "\e[32mInstalling package... (This might take a minute) "
-run_spinner "sudo dpkg -i google-earth-stable_current_amd64.deb > /dev/null && sudo apt-get -qq -f install -y"
+echo -e "Run dpkg "
+run_spinner "sudo dpkg -s -i google-earth-stable_current_amd64.deb 2> /dev/null"
+echo -e "Run apt-get "
+run_spinner "sudo apt-get -qq -f install -y"
+
 echo -e "Removing old file\n\e[0m"
 rm google-earth-stable_current_amd64.deb
 
