@@ -18,7 +18,7 @@ run_spinner() {
 echo -e "\e[1mGoogle Earth installer for Liquid Galaxy\e[0m"
 
 echo -e "\e[32mInstalling requirements...\e[0m"
-run_spinner "sudo apt-get -qq install net-tools -y"
+sudo apt-get -qq install net-tools -y
 
 echo -e "\e[32mInstalling Google Earth...\e[0m"
 cd /tmp
